@@ -69,8 +69,8 @@ function MapUpdater({ center }: { center: [number, number] }) {
 
 export default function Map({ hospitals, ambulances, currentLocation }: { hospitals: any[], ambulances: any[], currentLocation?: { lat: number, lng: number } | null }) {
     // Example coords (London approx) or current location
-    const centerPosition: [number, number] = currentLocation 
-        ? [currentLocation.lat, currentLocation.lng] 
+    const centerPosition: [number, number] = currentLocation
+        ? [currentLocation.lat, currentLocation.lng]
         : [23.1815, 79.9864];
 
     // Sample data to make the map look busy and functional
@@ -86,7 +86,7 @@ export default function Map({ hospitals, ambulances, currentLocation }: { hospit
     // ];
 
     return (
-        <div className="h-[450px] w-full rounded-2xl overflow-hidden border border-border shadow-sm isolate">
+        <div className="min-h-[450px] h-full w-full rounded-2xl overflow-hidden border border-border shadow-sm isolate">
             <MapContainer
                 center={centerPosition}
                 zoom={13}

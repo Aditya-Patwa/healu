@@ -3,6 +3,7 @@ import Header from "@/components/home/header";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { createClient } from "@/lib/supabase/server";
 import { Building2, Ambulance, Activity, Zap, Clock, ShieldAlert, Map as MapIcon } from "lucide-react";
+import BookAmbulanceButton from "@/components/dashboard/book-ambulance-button";
 
 export default async function Dashboard() {
     const supabase = await createClient();
@@ -96,6 +97,8 @@ export default async function Dashboard() {
 
                         {/* Side Panel */}
                         <div className="flex flex-col gap-6">
+                            <BookAmbulanceButton ambulances={ambulances || []} />
+                            
                             {/* Anomalies Card */}
                             <Card className="bg-neutral-50 flex-1 shadow-xl">
                                 <CardHeader className="pb-4">
