@@ -2,6 +2,7 @@
 import { bricolageGrotesque } from "@/lib/fonts";
 import { Button } from "../ui/button";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function Header() {
     const router = useRouter();
@@ -22,9 +23,11 @@ export default function Header() {
                     <Button variant={"secondary"} onClick={() => router.push("/dashboard/hospitals")}>
                         Hospitals
                     </Button>
-                    <Button variant={"secondary"} onClick={() => router.push("/dashboard/diseases")}>
-                        Diseases
-                    </Button>
+                    <Link href={"https://medi-healu.streamlit.app/"}>
+                        <Button variant={"secondary"}>
+                            Diseases
+                        </Button>
+                    </Link>
                     <Button variant={"secondary"} onClick={() => router.push("/dashboard/chat")}>
                         Chat
                     </Button>
