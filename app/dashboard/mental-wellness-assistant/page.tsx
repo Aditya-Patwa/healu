@@ -3,10 +3,9 @@
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
 import { bricolageGrotesque } from "@/lib/fonts"
-import { SendIcon, User, Bot, AlertCircle } from "lucide-react"
+import { SendIcon, User, Bot } from "lucide-react"
 import { useChat } from "@ai-sdk/react"
 import { useEffect, useRef, useState } from "react"
-import { Alert, AlertDescription } from "@/components/ui/alert"
 import { DefaultChatTransport } from 'ai';
 
 
