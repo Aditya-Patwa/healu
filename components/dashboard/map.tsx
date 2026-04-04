@@ -4,6 +4,8 @@
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
+import { useEffect } from "react";
+import { useMap } from "react-leaflet";
 
 // Create custom animated divIcons
 const activeUnitIcon = L.divIcon({
@@ -43,10 +45,33 @@ const hospitalIcon = L.divIcon({
     popupAnchor: [0, -20]
 });
 
+const userIcon = L.divIcon({
+    html: `
+        <div class="relative flex h-10 w-10 items-center justify-center">
+            <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-500 opacity-40"></span>
+            <span class="relative inline-flex h-5 w-5 rounded-full border-2 border-background bg-blue-600 shadow-md"></span>
+        </div>
+    `,
+    className: "custom-marker",
+    iconSize: [40, 40],
+    iconAnchor: [20, 20],
+    popupAnchor: [0, -20]
+});
 
-export default function Map({ hospitals, ambulances }: { hospitals: any[], ambulances: any[] }) {
-    // Example coords (London approx)
-    const centerPosition: [number, number] = [23.1815, 79.9864];
+// Component to handle map view centering
+function MapUpdater({ center }: { center: [number, number] }) {
+    const map = useMap();
+    useEffect(() => {
+        map.setView(center, map.getZoom());
+    }, [center, map]);
+    return null;
+}
+
+export default function Map({ hospitals, ambulances, currentLocation }: { hospitals: any[], ambulances: any[], currentLocation?: { lat: number, lng: number } | null }) {
+    // Example coords (London approx) or current location
+    const centerPosition: [number, number] = currentLocation 
+        ? [currentLocation.lat, currentLocation.lng] 
+        : [23.1815, 79.9864];
 
     // Sample data to make the map look busy and functional
     const units = [
@@ -69,11 +94,20 @@ export default function Map({ hospitals, ambulances }: { hospitals: any[], ambul
                 style={{ height: '100%', width: '100%', zIndex: 0 }}
                 zoomControl={false}
             >
+                <MapUpdater center={centerPosition} />
                 {/* Clean, light-themed map style */}
                 <TileLayer
                     attribution='&copy; <a href="https://carto.com/">Carto</a>'
                     url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
                 />
+
+                {currentLocation && (
+                    <Marker position={[currentLocation.lat, currentLocation.lng]} icon={userIcon}>
+                        <Popup className="font-sans">
+                            <div className="font-semibold text-foreground text-sm">Our Current Location</div>
+                        </Popup>
+                    </Marker>
+                )}
 
                 {hospitals.map(hospital => (
                     <Marker key={hospital.id} position={[hospital.lat, hospital.lng] as [number, number]} icon={hospitalIcon}>

@@ -2,8 +2,9 @@
 
 import dynamic from "next/dynamic";
 import { LocateFixed } from "lucide-react";
+import { useEffect, useState } from "react";
 
-// Dynamically import Map component to disable SSR for react-leaflet since Leaflet requires the \`window\` object
+// Dynamically import Map component to disable SSR for react-leaflet since Leaflet requires the `window` object
 const Map = dynamic(() => import("./map"), {
     ssr: false,
     loading: () => (
@@ -15,6 +16,26 @@ const Map = dynamic(() => import("./map"), {
 });
 
 export default function MapView({ hospitals, ambulances }: { hospitals: any[], ambulances: any[] }) {
+    const [currentLocation, setCurrentLocation] = useState<{ lat: number, lng: number } | null>(null);
+
+    useEffect(() => {
+        if ("geolocation" in navigator) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    setCurrentLocation({
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude,
+                    });
+                },
+                (error) => {
+                    console.error("Error getting location: ", error);
+                }
+            );
+        } else {
+            console.error("Geolocation is not supported by this browser.");
+        }
+    }, []);
+
     return (
         <div className="flex flex-col gap-4 w-full">
             {/* <div className="flex items-center gap-3">
@@ -27,7 +48,7 @@ export default function MapView({ hospitals, ambulances }: { hospitals: any[], a
                 </div>
             </div> */}
 
-            <Map hospitals={hospitals} ambulances={ambulances} />
+            <Map hospitals={hospitals} ambulances={ambulances} currentLocation={currentLocation} />
         </div>
     )
 }
