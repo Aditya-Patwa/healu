@@ -28,6 +28,9 @@ export default function Header() {
                     <Button variant={"secondary"} onClick={() => router.push("/dashboard/chat")}>
                         Chat
                     </Button>
+                    <Button variant={"secondary"} onClick={() => router.push("/dashboard/mental-wellness-assistant")}>
+                        Mental Wellness Assistant
+                    </Button>
                 </div>
             </div>
         </header>
