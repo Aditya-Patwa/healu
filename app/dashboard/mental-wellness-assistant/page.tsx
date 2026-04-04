@@ -14,7 +14,7 @@ function Header() {
         <header className="w-full grid px-4 md:px-8 py-4 bg-background/80 backdrop-blur sticky top-0 z-10 border-b">
             <div>
                 <h2 className={`${bricolageGrotesque.className} text-2xl font-semibold tracking-tighter leading-none flex items-center gap-2`}>
-                    healu <span className="text-sm font-normal text-muted-foreground bg-muted px-2 py-1 rounded-full">Mental Wellness Assistant</span>
+                    MediHelp <span className="text-sm font-normal text-muted-foreground bg-muted px-2 py-1 rounded-full">Mental Wellness Assistant</span>
                 </h2>
             </div>
         </header>

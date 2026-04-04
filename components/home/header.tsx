@@ -11,7 +11,7 @@ export default function Header() {
             <div className="max-w-7xl w-full justify-self-center items-center flex justify-between">
                 <div>
                     <h2 className={`${bricolageGrotesque.className} text-2xl font-semibold tracking-tighter leading-none`}>
-                        healu
+                        MediHelp
                     </h2>
                 </div>
 
