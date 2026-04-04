@@ -9,6 +9,7 @@ export default async function Dashboard() {
 
     const { data: hospitals } = await supabase.from("hospitals").select("*");
     const { data: ambulances } = await supabase.from("ambulances").select("*");
+    const { data: reroute_logs } = await supabase.from("reroute_logs").select("*");
 
     const kpiData = [
         {
@@ -25,16 +26,16 @@ export default async function Dashboard() {
             description: "On-duty vehicles",
             trend: "All systems online"
         },
-        {
-            title: "Grid Stress Level",
-            value: "78%",
-            icon: <Activity className="w-5 h-5 text-rose-500" />,
-            description: "Current network load",
-            trend: "+12% from avg"
-        },
+        // {
+        //     title: "Grid Stress Level",
+        //     value: "78%",
+        //     icon: <Activity className="w-5 h-5 text-rose-500" />,
+        //     description: "Current network load",
+        //     trend: "+12% from avg"
+        // },
         {
             title: "AI Reroutes",
-            value: 14,
+            value: reroute_logs?.length || 0,
             icon: <Zap className="w-5 h-5 text-amber-500" />,
             description: "Active trajectory changes",
             trend: "Optimizing 3 routes"
@@ -54,7 +55,7 @@ export default async function Dashboard() {
                     </div>
 
                     {/* KPI Cards Row */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
                         {kpiData.map((kpi, idx) => (
                             <Card key={idx} className="bg-neutral-50 border-neutral-400 shadow-xl overflow-hidden relative group transition-all duration-300 shadow-2xl">
                                 <div className="absolute inset-0 bg-gradient-to-br from-white/[0.04] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
