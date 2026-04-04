@@ -19,10 +19,10 @@ export default function Header() {
                     <Button variant={"secondary"} onClick={() => router.push("/dashboard")}>
                         Dashboard
                     </Button>
-                    <Button variant={"secondary"} onClick={() => router.push("/dashboard")}>
+                    <Button variant={"secondary"} onClick={() => router.push("/dashboard/hospitals")}>
                         Hospitals
                     </Button>
-                    <Button variant={"secondary"} onClick={() => router.push("/dashboard")}>
+                    <Button variant={"secondary"} onClick={() => router.push("/dashboard/diseases")}>
                         Diseases
                     </Button>
                     <Button variant={"secondary"} onClick={() => router.push("/dashboard/chat")}>
